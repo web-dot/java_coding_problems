@@ -1,6 +1,7 @@
 package com.problems.StringNumbersMath;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -75,16 +76,28 @@ public class StringProblems {
 		}
 		return position == Integer.MAX_VALUE ? Character.MIN_VALUE : str.charAt(position);
 	}
+	
+	/**
+	 * the second approach consists of looping through the string for each character,
+	 * every second occurance(duplicate) will break the loop, jumps to the next character
+	 * and repeats the algorithm
+	 * */
+	public static char findFirstNonRepeatingChar(String str) {
+		Map<Character, Integer> chars = new LinkedHashMap<>();
+		for(char ch : str.toCharArray()) {
+			chars.compute(ch, (k, v) -> (v == null) ? 1 : ++v);
+		}
+		for(Map.Entry<Character, Integer> entry : chars.entrySet()) {
+			if(entry.getValue() == 1) {
+				return entry.getKey();
+			}
+		}
+		return Character.MIN_VALUE;
+	}
 		
 			
 	public static void main(String[] args) {
-		System.out.println(firstNonRepeatedChar("programming"));
-		
-		
-		
-		
-		
-		
+		System.out.println(findFirstNonRepeatingChar("assistance"));
 		
 		/**
 		 * Notes
