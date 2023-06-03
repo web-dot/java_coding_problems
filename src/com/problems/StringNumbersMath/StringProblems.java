@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class StringProblems {
 	
 	/**
-	 * 1. counting duplicate characters
+	 * 1. COUNT DUPLICATE CHARS
 	 * */
 	
 	public static Map<Character, Integer> countDuplicatesChars(String str){
@@ -53,7 +53,7 @@ public class StringProblems {
 	}
 	
 	/**
-	 * 2. Finding the first non-reapeated character
+	 * 2. FIND FIRST NON-REPEATING CHAR
 	 * */
 	
 	// single traversal
@@ -103,7 +103,7 @@ public class StringProblems {
 	
 	
 	/**
-	 * 3. Reversing a string
+	 * 3. REVERSE A STRING
 	 * */
 	private static final String WHITESPACE = " ";
 	public static String reverseWord(String str) {
@@ -135,7 +135,7 @@ public class StringProblems {
 	}
 	
 	/**
-	 * 4. checking whether a string contains only digits
+	 * 4. STRING CONTAINS ONLY DIGITS
 	 * 
 	 * */
 	public static boolean containsOnlyDigits(String str) {
@@ -160,7 +160,7 @@ public class StringProblems {
 	
 	
 	/**
-	 * 5. Counting vowels and consonants
+	 * 5. COUNT VOWELS AND CONSONANTS
 	 * */
 	private static final Set<Character> allVowels = new HashSet(Arrays.asList('a','e','i','o','u'));
 	public static List<Integer> countVowelsAndConsonants(String str){
@@ -196,9 +196,61 @@ public class StringProblems {
 		list.add(consonants);
 		return list;
 	}
+	
+	/**
+	 * 6. REMOVE WHITESPACE
+	 * */
+	public static String removeWhites(String str) {
+		return str.replaceAll("\\s", "");
+	}
+	
+	/**
+	 * 7. JOINING MULTIPLE STRINGS WITH A DELIMETER
+	 * */
+	public static String joinWithDelimeter(char deleimeter, String str) {
+		String[] arr = str.split(" ");
+		return Arrays.stream(arr)
+				.collect(Collectors.joining(String.valueOf(deleimeter)));
+	}
+	
+	
+	/**
+	 * 8. GENERATING ALL PERMUTATIONS
+	 * 
+	 * 					ABC
+	 * 		ABC			BAC			CBA
+	 * 	ABC 	ACB	BAC		BCA	CBA		CAB
+	 * 
+	 * */
+//	public static void permuteAndPrint(String str) {
+//		permuteAndPrint("", str);
+//	}
+//	
+//	private static void permuteAndPrint(String prefix, String str) {
+//		int n = str.length();
+//		if() {}
+//	}
+	
+	
+	/**
+	 * 11. IF A STRING IS PALINDROME
+	 * */
+	public static boolean isPalindrome(String str) {
+		int left = 0;
+		int right = str.length()-1;
+		while(right > left) {
+			if(str.charAt(left) != str.charAt(right)) {
+				return false;
+			}
+			left++;
+			right--;
+		}
+		return true;
+	}
+	
 			
 	public static void main(String[] args) {
-		System.out.println(countVandC("hello"));
+		System.out.println(isPalindrome("codoc"));
 		
 		/**
 		 * Notes
