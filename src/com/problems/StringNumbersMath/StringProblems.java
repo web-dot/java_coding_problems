@@ -248,20 +248,104 @@ public class StringProblems {
 		return true;
 	}
 	
-			
+	
+	/**
+	 * 12. REMOVING DUPLICATE CHARACTERS
+	 * */
+	
+	// indexOf - returns the index within the given string the first occurrence of specified string 
+	/**
+	 * loop over the given string and append the chars one at a time in a StringBuilder if the 
+	 * indexOf of the character returns -1
+	 * */
+	public static String removeDuplicates(String str) {
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<str.length(); i++) {
+			char ch = str.charAt(i);
+			if(sb.indexOf(String.valueOf(ch)) == -1) {
+				sb.append(ch);
+			}
+		}
+		return sb.toString();
+	}
+	
+	/**
+	 * using HashSet and StringBuilder :
+	 * HashSet removes duplicates and StringBuilder stores the resulting string.
+	 * If HashSet.add() returns true, then we append the char in string-builder
+	 * */
+	public static String removeDuplicatesUsingHashSet(String str) {
+		StringBuilder sb = new StringBuilder();
+		HashSet<String> set = new HashSet<>();
+		char[] charArray = str.toCharArray();
+		for(char ch : charArray) {
+			if(set.add(String.valueOf(ch)) == true) {
+				sb.append(ch);
+			}
+		}
+		return sb.toString();
+	}
+	
+	/**
+	 * using streams
+	 * */
+	public static String removeDuplicatesWithStreams(String str) {
+		return Arrays.asList(str.split(""))
+				.stream()
+				.distinct()
+				.collect(Collectors.joining());
+	}
+	
+	
+	/**
+	 * 13: REMOVING A GIVEN CHAR
+	 * */
+	public static String removeCharUsingRegEx(String str, char ch) {
+		return str.replaceAll(Pattern.quote(String.valueOf(ch)), "");
+	}
+	
+	// without regular expressions
+	public static String removeChar(String str, char c) {
+		StringBuilder sb = new StringBuilder();
+		char[] charArray = str.toCharArray();
+		for(char ch : charArray) {
+			if(ch != c) {
+				sb.append(ch);
+			}
+		}
+		return sb.toString();
+	}
+	
+	// using Java8 streams
+	public static String removeCharsWithStreams(String str, char ch) {
+		return str.chars()
+				.filter(c -> c != ch)
+				.mapToObj(c -> String.valueOf((char)c))
+				.collect(Collectors.joining());
+	}
+	
 	public static void main(String[] args) {
-		System.out.println(isPalindrome("codoc"));
+		System.out.println(removeCharUsingRegEx("programming good", 'g'));
+		System.out.println(removeChar("programming good", 'g'));
+		System.out.println(removeCharsWithStreams("programming good", 'g'));
 		
 		/**
 		 * Notes
 		 * */
 		
-		// problem 3
-		Pattern p = Pattern.compile("-");
-		String schedule = "MUMBAI-17:50";
-		Stream<String> str = p.splitAsStream(schedule);
-		str.forEach(System.out::println);
 		
+		// problem 13
+		String s1 = "ss*as/ada";
+		String p = Pattern.quote(s1);
+		System.out.println(p);
+		
+		
+		// problem 3
+//		Pattern p = Pattern.compile("-");
+//		String schedule = "MUMBAI-17:50";
+//		Stream<String> str = p.splitAsStream(schedule);
+//		str.forEach(System.out::println);
+//		
 		
 		
 		// problem 1
