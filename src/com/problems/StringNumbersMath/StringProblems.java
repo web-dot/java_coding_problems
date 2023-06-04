@@ -324,6 +324,13 @@ public class StringProblems {
 				.collect(Collectors.joining());
 	}
 	
+	/**
+	 * 13. FINDING CHARACTER WITH MOST APPEARANCES
+	 * */
+	public static Map<Character, Integer> maxOccuranceCharacter(String str){
+		return null;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(removeCharUsingRegEx("programming good", 'g'));
 		System.out.println(removeChar("programming good", 'g'));
