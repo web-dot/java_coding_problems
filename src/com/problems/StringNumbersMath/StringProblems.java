@@ -2,6 +2,7 @@ package com.problems.StringNumbersMath;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -11,7 +12,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class StringProblems {
 	
@@ -326,26 +326,97 @@ public class StringProblems {
 	
 	/**
 	 * 13. FINDING CHARACTER WITH MOST APPEARANCES
+	 * 
+	 * -> if there are multiple characters with max appearance
+	 * 	  should i return any one of the results or i need to 
+	 *    return a key-pair of all the max occurring chars
+	 * 
 	 * */
 	public static Map<Character, Integer> maxOccuranceCharacter(String str){
-		return null;
+		Map<Character, Integer> counter = new HashMap<>();
+		char[] chStr = str.toCharArray();
+		for(int i=0; i<chStr.length; i++) {
+			char currentCh = chStr[i];
+			if(!Character.isWhitespace(currentCh)) { // ignore spaces
+				Integer chCount = counter.get(currentCh);
+				if(chCount == null) {
+					counter.put(currentCh, 1);
+				}
+				else {
+					counter.put(currentCh, ++chCount);
+				}
+			}
+		}
+		int maxOccurances = Collections.max(counter.values());
+		char maxCharacter = Character.MIN_VALUE;
+		for(Map.Entry<Character, Integer> entry : counter.entrySet()) {
+			if(entry.getValue() == maxOccurances) {
+				maxCharacter = entry.getKey();
+			}
+		}
+		Map<Character, Integer> result = new HashMap<>();
+		result.put(maxCharacter, maxOccurances);
+		return result;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(removeCharUsingRegEx("programming good", 'g'));
-		System.out.println(removeChar("programming good", 'g'));
-		System.out.println(removeCharsWithStreams("programming good", 'g'));
+	
+	// solution using ASCII codes
+	public static Map<Character, Integer> maxOccuranceUsingASCII(String str){
+		int maxOccurance = -1;
+		char maxChar = Character.MIN_VALUE;
+		char[] chStr = str.toCharArray();
+		int[] asciiCodes = new int[EXTENDED_ASCII_CODES];
 		
+		for(int i=0; i<chStr.length; i++) {
+			char currentCh = chStr[i];
+			if(!Character.isWhitespace(currentCh)) {
+				int code = (int)currentCh;
+				asciiCodes[code]++;
+				if(asciiCodes[code] > maxOccurance) {
+					maxOccurance = asciiCodes[code];
+					maxChar = currentCh;
+				}
+			}
+		}
+		Map<Character, Integer> result = new HashMap<>();
+		result.put(maxChar, maxOccurance);
+		return result;
+	}
+	
+	// solution using streams api
+//	public static Map<Character, Integer> maxOccuranceUsingStreams(String str){
+//		Map<Character, Integer> result = new HashMap<>();
+//		return str.chars() 
+//				.filter(c -> Character.isWhitespace(c) == false)
+//				.mapToObj(c -> (char)c)
+//				.collect(groupingBy(c -> c, counting()))
+//				.entrySet()
+//				.stream()
+//				.max(comparingByValues())
+//				.map(p -> result.put(p.getKey(), p.getValue()))
+//				.orElse(result.put(Character.MIN_VALUE, -1));
+//	}
+	
+	
+	public static void main(String[] args) {
+		System.out.println(maxOccuranceUsingASCII("coder is coding in a coding course")); 
 		/**
 		 * Notes
 		 * */
 		
-		
+	
 		// problem 13
-		String s1 = "ss*as/ada";
-		String p = Pattern.quote(s1);
-		System.out.println(p);
-		
+//		String s1 = "ss*as/ada";
+//		String p = Pattern.quote(s1);
+//		System.out.println(p);
+//		
+//		Map<String, Integer> map = new HashMap<>();
+//		map.put("a", 1);
+//		map.put("b", 3);
+//		map.put("c", 4);
+//		System.out.println(map.values());
+//		Integer max = Collections.max(map.values());
+//		System.out.println(max);
 		
 		// problem 3
 //		Pattern p = Pattern.compile("-");
@@ -356,24 +427,24 @@ public class StringProblems {
 		
 		
 		// problem 1
-		Map<Character, Integer> map = new HashMap<>();
-		char key = 'a';
-		int value = 1;
-		
+//		Map<Character, Integer> map1 = new HashMap<>();
+//		char key = 'a';
+//		int value = 1;
+//		
 		// using map.compute()
-		map.compute(key, (k, v) -> (v == null) ? value : v + value);
-		
-		// using map.contains()
-		if(map.containsKey(key)) {
-			map.put(key, map.get(key) + value);
-		}
-		else {
-			map.put(key, 1);
-		}
+//		map1.compute(key, (k, v) -> (v == null) ? value : v + value);
+//		
+//		// using map.contains()
+//		if(map.containsKey(key)) {
+//			map1.put(key, map.get(key) + value);
+//		}
+//		else {
+//			map1.put(key, 1);
+//		}
 		
 		// string.chars()
-		String s = "Hello";
-		IntStream charStream = s.chars();
+//		String s = "Hello";
+//		IntStream charStream = s.chars();
 //		charStream.forEach(System.out::println);
 //		List<Character> charList = charStream.mapToObj(c -> (char)c).collect(Collectors.toList()); // IllegalStateException
 //		System.out.println(charList);
