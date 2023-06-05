@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class StringProblems {
 	
@@ -397,9 +396,33 @@ public class StringProblems {
 //				.orElse(result.put(Character.MIN_VALUE, -1));
 //	}
 	
+	/**
+	 * 14. SORTING AN ARRAY OF STRING BY LENGTH
+	 * 
+	 * */
+	
+	/**
+	 * -The first thing that comes to mind is using a comparator.
+	 * -Arrays.sort() takes the array and a comparator object as second arg
+	 * -In this case Comparator<String> should do the job
+	 * -Comparator needs to override the compareTo() method, but using a compareTo may lead to overflow
+	 * -from Java7, Integer.compare() is the way to go
+	 * */
+	public static String[] sortArrayByLength(String[] strs, Sort direction) {
+		if(direction.equals(Sort.ASC)) {
+			Arrays.sort(strs, (String s1, String s2) -> Integer.compare(s1.length(), s2.length()));
+		}
+		else {
+			Arrays.sort(strs, (String s1, String s2) -> (-1) * Integer.compare(s1.length(), s2.length()));
+		}
+		return strs;
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(maxOccuranceUsingASCII("coder is coding in a coding course")); 
+		System.out.println(Arrays.toString(sortArrayByLength(new String[] {"coder", "is", "coding", "in", "a", "coding", "course"}, Sort.ASC))); 
+		System.out.println(Arrays.toString(sortArrayByLength(new String[] {"coder", "is", "coding", "in", "a", "coding", "course"}, Sort.DSC)));
+		
 		/**
 		 * Notes
 		 * */
@@ -451,4 +474,8 @@ public class StringProblems {
 	}
 	
 
+}
+
+enum Sort{
+	ASC, DSC
 }
