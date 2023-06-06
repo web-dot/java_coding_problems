@@ -3,6 +3,7 @@ package com.problems.StringNumbersMath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -414,6 +415,17 @@ public class StringProblems {
 		}
 		else {
 			Arrays.sort(strs, (String s1, String s2) -> (-1) * Integer.compare(s1.length(), s2.length()));
+		}
+		return strs;
+	}
+	
+	
+	// using Comparator.comparingInt()
+	public static String[] sortArrayByLengthUsingComparator(String[] strs, Sort direction) {
+		if(direction.equals(Sort.ASC)) {
+			Arrays.sort(strs, Comparator.comparingInt(String::length));
+		}else {
+			Arrays.sort(strs, Comparator.comparingInt(String::length).reversed());
 		}
 		return strs;
 	}
