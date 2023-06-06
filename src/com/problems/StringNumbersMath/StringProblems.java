@@ -430,10 +430,24 @@ public class StringProblems {
 		return strs;
 	}
 	
+	// using streams
+	public static String[] sortArrayByLengthUsingStreams(String[] strs, Sort direction) {
+		if(direction.equals(Sort.ASC)) {
+			return Arrays.stream(strs)
+					.sorted(Comparator.comparingInt(String::length))
+					.toArray(String[]::new);
+			
+		}
+		else {
+			return Arrays.stream(strs)
+					.sorted(Comparator.comparingInt(String::length).reversed())
+					.toArray(String[]::new);
+		}
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(Arrays.toString(sortArrayByLength(new String[] {"coder", "is", "coding", "in", "a", "coding", "course"}, Sort.ASC))); 
-		System.out.println(Arrays.toString(sortArrayByLength(new String[] {"coder", "is", "coding", "in", "a", "coding", "course"}, Sort.DSC)));
+		System.out.println(Arrays.toString(sortArrayByLengthUsingStreams(new String[] {"coder", "is", "coding", "in", "a", "coding", "course"}, Sort.DSC)));
 		
 		/**
 		 * Notes
