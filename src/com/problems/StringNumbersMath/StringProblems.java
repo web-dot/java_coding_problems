@@ -420,6 +420,22 @@ public class StringProblems {
 	}
 	
 	
+	// using comparator
+	public static void sortArrayByLengthByComparator(String[] strs, Sort direction) {
+		if(direction.equals(Sort.ASC)) {
+			Arrays.sort(strs, Comparator.comparingInt(String::length));
+		}
+		else {
+			Arrays.sort(strs, Comparator.comparingInt(String::length).reversed());
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * */
+	
+	
 	// using Comparator.comparingInt()
 	public static String[] sortArrayByLengthUsingComparator(String[] strs, Sort direction) {
 		if(direction.equals(Sort.ASC)) {
