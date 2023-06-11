@@ -431,11 +431,6 @@ public class StringProblems {
 	}
 	
 	
-	/**
-	 * 
-	 * */
-	
-	
 	// using Comparator.comparingInt()
 	public static String[] sortArrayByLengthUsingComparator(String[] strs, Sort direction) {
 		if(direction.equals(Sort.ASC)) {
@@ -462,8 +457,20 @@ public class StringProblems {
 	}
 	
 	
+	/**
+	 * 15. CHECKING THAT A STRING CONTAINS A SUBSTRING
+	 * */
+	public static boolean containsSubString(String str, String substring) {
+		return str.contains(substring);
+	}
+	
+	public static boolean containsSub(String str, String sub) {
+		return str.indexOf(sub) != -1;
+	}
+	
+	
 	public static void main(String[] args) {
-		System.out.println(Arrays.toString(sortArrayByLengthUsingStreams(new String[] {"coder", "is", "coding", "in", "a", "coding", "course"}, Sort.DSC)));
+		System.out.println(containsSubString("programming", "gram"));
 		
 		/**
 		 * Notes
