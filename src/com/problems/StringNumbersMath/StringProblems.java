@@ -61,23 +61,23 @@ public class StringProblems {
 	private static final int EXTENDED_ASCII_CODES = 256;
 	
 	public static char firstNonRepeatedChar(String str) {
-		int[] flags = new int[EXTENDED_ASCII_CODES];
-		for(int i = 0; i<flags.length; i++) {
-			flags[i] = -1;
+		int[] arr = new int[EXTENDED_ASCII_CODES];
+		for(int i = 0; i<arr.length; i++) {
+			arr[i] = -1;
 		}
 		for(int i=0; i<str.length(); i++) {
 			char c = str.charAt(i);
-			if(flags[c] == -1) {
-				flags[c] = i;
+			if(arr[c] == -1) {
+				arr[c] = i;
 			}
 			else {
-				flags[c] = -2;
+				arr[c] = -2;
 			}
 		}
 		int position = Integer.MAX_VALUE;
-		for(int i=0; i<flags.length; i++) {
-			if(flags[i] >= 0) {
-				position = Math.min(position, flags[i]);
+		for(int i=0; i<arr.length; i++) {
+			if(arr[i] >= 0) {
+				position = Math.min(position, arr[i]);
 			}
 		}
 		return position == Integer.MAX_VALUE ? Character.MIN_VALUE : str.charAt(position);
@@ -99,6 +99,24 @@ public class StringProblems {
 			}
 		}
 		return Character.MIN_VALUE;
+	}
+	
+	
+	/**
+	 * 3. COUNT OCCURANCE OF CERTAIN CHARACTER
+	 * */
+	public static int findOccurance(String str, char c) {
+		Map<Character, Integer> map = new HashMap<>();
+		int count = 0;
+		for(char ch : str.toCharArray()) {
+			map.compute(ch, (k, v) -> (v == null) ? 1 : ++v);
+		}
+		for(Map.Entry<Character, Integer> entry : map.entrySet()) {
+			if(entry.getKey() == c) {
+				count = entry.getValue();
+			}
+		}
+		return count;
 	}
 	
 	
@@ -469,8 +487,14 @@ public class StringProblems {
 	}
 	
 	
+	/**
+	 * 16. COUNTING SUBSTRING OCCURANCES IN A STRING
+	 * */
+	
+	
+	
 	public static void main(String[] args) {
-		System.out.println(containsSubString("programming", "gram"));
+		System.out.println(findOccurance("systematic", 't'));
 		
 		/**
 		 * Notes
