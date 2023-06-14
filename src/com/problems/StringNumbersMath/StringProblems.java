@@ -491,10 +491,21 @@ public class StringProblems {
 	 * 16. COUNTING SUBSTRING OCCURANCES IN A STRING
 	 * */
 	
+	// using String.indexOf(String str, int fromIndex), which returns -1 if the string is not found at a index
+	public static int subStringCount(String str, String sub) {
+		int position = 0;
+		int count = 0;
+		while((position =str.indexOf(sub, position)) != -1) {
+			position = position + sub.length();
+			count++;
+		}
+		return count;
+	}
+	
 	
 	
 	public static void main(String[] args) {
-		System.out.println(findOccurance("systematic", 't'));
+		System.out.println(subStringCount("systesysmaticsys", "sys"));
 		
 		/**
 		 * Notes
