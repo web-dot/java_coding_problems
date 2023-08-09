@@ -23,8 +23,19 @@ public class StringProblemsRecap {
 	}
 	
 	
+	// count duplicate characters
+	public static Map<Character, Integer> countDuplicateChars(String str){
+		char[] carr = str.toCharArray();
+		Map<Character, Integer> result = new HashMap<>();
+		for(int i=0; i<carr.length; i++) {
+			char ch = carr[i];
+			result.compute(ch, (k, v) -> (v==null) ? 1 : ++v);
+		}
+		return result;
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(countDuplicates("programming"));
+		System.out.println(countDuplicateChars("programming"));
 	}
 }
