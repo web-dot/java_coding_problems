@@ -2,6 +2,7 @@ package com.problems.StringNumbersMath;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StringProblemsRecap {
 	
@@ -34,8 +35,15 @@ public class StringProblemsRecap {
 		return result;
 	}
 	
+	// count duplicates using stream
+	public static Map<Character, Long> countDuplicatesUsingStream(String str){
+		return str.chars()
+		.mapToObj(c -> (char)c)
+		.collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(countDuplicateChars("programming"));
+		System.out.println(countDuplicatesUsingStream("programming"));
 	}
 }
