@@ -1,6 +1,7 @@
 package com.problems.StringNumbersMath;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -42,8 +43,22 @@ public class StringProblemsRecap {
 		.collect(Collectors.groupingBy(c -> c, Collectors.counting()));
 	}
 	
+	//first non-repeating char
+	public static Character findFirstNonRepeating(String str) {
+		Map<Character, Integer> chars = new LinkedHashMap<>();
+		for(char ch : str.toCharArray()) {
+			chars.compute(ch, (k,v) -> (v == null) ? 1 : ++v);
+		}
+		for(Map.Entry<Character, Integer> entry : chars.entrySet()) {
+			if(entry.getValue() == 1) {
+				return entry.getKey();
+			}
+		}
+		return Character.MIN_VALUE;
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(countDuplicatesUsingStream("programming"));
+		System.out.println(findFirstNonRepeating("sunnys"));
 	}
 }
