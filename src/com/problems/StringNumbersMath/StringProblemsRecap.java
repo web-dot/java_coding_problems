@@ -57,8 +57,22 @@ public class StringProblemsRecap {
 		return Character.MIN_VALUE;
 	}
 	
+	public static Character findFirstNonRepeatingCharacter(String str) {
+		Map<Character, Integer> chars = new LinkedHashMap<>();
+		for(int i=0; i<str.length(); i++) {
+			char ch = str.charAt(i);
+			chars.compute(ch, (k, v) -> v == null ? 1 : ++v);
+		}
+		for(Map.Entry<Character, Integer> entry : chars.entrySet()) {
+			if(entry.getValue() == 1) {
+				return entry.getKey();
+			}
+		}
+		return Character.MIN_VALUE;
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(findFirstNonRepeating("sunnys"));
+		System.out.println(findFirstNonRepeatingCharacter("sunnys"));
 	}
 }

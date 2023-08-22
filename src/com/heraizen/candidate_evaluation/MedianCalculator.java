@@ -4,40 +4,23 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class MedianCalculator {
-	public static int[] sorting(int Arr[])
-	{
-		for(int i=0;i<Arr.length-1;i++)
-		{
-           for (int j = i+1; j < Arr.length; j++) 
-           {
-   			if(Arr[i]>Arr[j])
-   			{
-   				int temp=Arr[j];
-   				 Arr[j]=Arr[i];
-   				  Arr[i]=temp;
-   			}
-		   }
-		}
-		return Arr;
+	private static float median(int[] a) {
+		 int n = a.length;
+
+	     if (n % 2 == 1) {
+	       
+	         return a[n / 2];
+	     } else {
+	        
+	         int middle1 = a[n / 2 - 1];
+	         int middle2 = a[n / 2];
+	         return  (float) ((middle1 + middle2) / 2.0);
+	     }
 	}
-	  public static float median(int Arr[],int len)
-	  {
-		  float res=0;
-		  int Arr1[]=sorting(Arr);
-		  if(len%2==0)
-		  {
-			  res=(float)Arr1[(len/2)-1]+((float)Arr1[len/2]-(float)Arr1[(len/2)-1])/2;
-		  }
-		  else
-		  {
-			  res=(float)Arr1[len/2];
-		  }
-		  return res;
-	  }
-	  
+
 	  public static void main(String[] args) {
-		  int[] arr = {2,5,7,1};
-		  System.out.println(median(arr, arr.length));
+		  int[] arr = {1,6,2,7,9};
+		  System.out.println(median(arr));
 	  }
 }
 
