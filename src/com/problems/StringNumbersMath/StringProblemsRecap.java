@@ -71,8 +71,24 @@ public class StringProblemsRecap {
 		return Character.MIN_VALUE;
 	}
 	
+	// count occurrence of a character
+	public static int countOccurence(String str, char ch) {
+		Map<Character, Integer> chars = new HashMap<>();
+		for(int i=0; i<str.length(); i++) {
+			char character = str.charAt(i);
+			chars.compute(character, (k, v) -> (v == null) ? 1 : ++v);
+		}
+		int count = 0;
+		for(Map.Entry<Character, Integer> entry : chars.entrySet()) {
+			if(entry.getKey() == ch) {
+				count = entry.getValue();
+			}
+		}
+		return count;
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(findFirstNonRepeatingCharacter("sunnys"));
+		System.out.println(countOccurence("programming", 'm'));
 	}
 }
