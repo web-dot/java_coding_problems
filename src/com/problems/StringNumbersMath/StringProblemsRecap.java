@@ -87,8 +87,23 @@ public class StringProblemsRecap {
 		return count;
 	}
 	
+	// reverse a string
+	private static final String WHITESPACE = " ";
+	public static String reverseString(String str) {
+		String[] words = str.split(WHITESPACE);
+		StringBuilder reverseString = new StringBuilder();
+		for(String word : words) {
+			StringBuilder reverseWord = new StringBuilder();
+			for(int i= word.length()-1; i>=0; i--) {
+				reverseWord.append(word.charAt(i));
+			}
+			reverseString.append(reverseWord).append(WHITESPACE);
+		}
+		return reverseString.toString();
+	}
+	
 	
 	public static void main(String[] args) {
-		System.out.println(countOccurence("programming", 'm'));
+		System.out.println(reverseString("i am a computer programmer"));
 	}
 }
