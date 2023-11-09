@@ -505,7 +505,7 @@ public class StringProblems {
 	
 	
 	public static void main(String[] args) {
-		System.out.println(subStringCount("systesysmaticsys", "sys"));
+		System.out.println(reverseWord("hello programmer"));
 		
 		/**
 		 * Notes
