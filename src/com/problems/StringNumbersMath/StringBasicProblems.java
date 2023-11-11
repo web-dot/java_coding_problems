@@ -112,8 +112,26 @@ public class StringBasicProblems {
 		return maxChar;
 	}
 	
+	// reverse a string in place with O(1) memory
+	public static String reverseInPlace(char[] s) {
+		int p1 = 0;
+		int p2 = s.length-1;
+		while(p1 < p2) {
+			char temp = ' ';
+			temp = s[p1];
+			s[p1] = s[p2];
+			s[p2] = temp;
+			
+			p1++;
+			p2--;
+		}
+		return String.valueOf(s);
+	}
+	
+	
 	public static void main(String[] args) {
-		System.out.println(maxOccuringChar("programmingg"));
+		System.out.println(reverseInPlace(new char[] {'c', 'o', 'd', 'e'}));
+//		System.out.println(maxOccuringChar("programmingg"));
 //		System.out.println(removeGivenChar("madam", 'm'));
 //		System.out.println(removeDuplicates("mm"));
 //		System.out.println(countOccurenceOfChar("program", 'g'));
