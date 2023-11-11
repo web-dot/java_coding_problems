@@ -128,9 +128,33 @@ public class StringBasicProblems {
 		return String.valueOf(s);
 	}
 	
+	// reverse string using xor
+	public static String reverseInXOR(String s) {
+		char[] ca = s.toCharArray();
+		for(int i=0; i<ca.length/2; i++) {
+			ca[i] = (char)(ca[i]^ca[ca.length-i-1]);
+			ca[ca.length-i-1] = (char)(ca[i]^ca[ca.length-i-1]);
+			ca[i] = (char)(ca[i]^ca[ca.length-i-1]);
+		}
+		return String.valueOf(ca);
+	}
+	
+	//check if a string contains only digits
+	public static boolean isDigit(String s) {
+		for(char ch : s.toCharArray()) {
+			if(!Character.isDigit(ch)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	// 
 	
 	public static void main(String[] args) {
-		System.out.println(reverseInPlace(new char[] {'c', 'o', 'd', 'e'}));
+		System.out.println(reverseInXOR("code"));
+//		System.out.println(isDigit("2s451"));
+//		System.out.println(reverseInPlace(new char[] {'c', 'o', 'd', 'e'}));
 //		System.out.println(maxOccuringChar("programmingg"));
 //		System.out.println(removeGivenChar("madam", 'm'));
 //		System.out.println(removeDuplicates("mm"));
