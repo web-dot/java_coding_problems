@@ -36,7 +36,23 @@ public class StringBasicProblems {
 		return Character.MIN_VALUE;
 	}
 	
+	// return the index of the first non repeating character
+	public static int firstUniqueChar(String s) {
+		Map<Integer, Integer> countMap = new LinkedHashMap<>();
+		for(int i=0; i<s.length(); i++) {
+			char ch = s.charAt(i);
+			countMap.compute(s.indexOf(ch), (k, v) -> (v == null) ? 1 : ++v);
+		}
+		for(Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
+			if(entry.getValue() == 1) {
+				return entry.getKey();
+			}
+		}
+		return -1;
+	}
+	
 	public static void main(String[] args) {
-		
+		System.out.println(firstUniqueChar("madam"));
+		System.out.println(findFirstNonReapeatingChar("madamca"));
 	}
 }
